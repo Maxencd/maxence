@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代派智能聊天室</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+    <!-- 引入Socket.IO客户端库 -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <!-- 侧边栏 - 在线用户列表 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>ACTIVE CHAT</h3>
+                <div class="current-user">
+                    <span>当前用户: <strong>{{ nickname }}</strong></span>
+                </div>
+            </div>
+            <div class="user-list">
+                <h4>在线用户 <span id="user-count">(0)</span></h4>
+                <ul id="online-users">
+                    <!-- 在线用户将通过JavaScript动态添加 -->
+                </ul>
+            </div>
+            <button id="logout-btn" class="logout-btn">退出登录</button>
+        </div>
+        
+        <!-- 主聊天区域 -->
+        <div class="chat-main">
+            <!-- 聊天头部 -->
+            <div class="chat-header">
+                <h2>聊天室</h2>
+                <div class="header-actions">
+                    <button id="emoji-btn" class="emoji-btn">😊</button>
+                    <button id="clear-btn" class="clear-btn">清空</button>
+                </div>
+            </div>
+            
+            <!-- 聊天消息区域 -->
+            <div id="messages" class="messages">
+                <div class="message system-message">
+                    <p>欢迎来到代派智能聊天室，{{ nickname }}！</p>
+                    <span class="timestamp">{{ now }}</span>
+                </div>
+                <div class="message system-message">
+                    <p>提示：使用@电影 URL可以发送电影链接，使用@川小农 可以与AI对话</p>
+                    <span class="timestamp">{{ now }}</span>
+                </div>
+            </div>
+            
+            <!-- 消息输入区域 -->
+            <div class="message-input-container">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="message-input" 
+                        placeholder="输入消息... 按Enter发送，Shift+Enter换行" 
+                        autocomplete="off"
+                    >
+                    <div id="emoji-panel" class="emoji-panel">
+                        <!-- 常用emoji表情 -->
+                        <div class="emoji-grid">
+                            😀 😃 😄 😁 😆 😅 🤣 😂 🙂 🙃 😉 😊 😇 🥰 😘 😗 😙 😚 😋 😛 😜 🤪 🤨 🧐 🤓 😎 🤩 🥳 😏 😒 😞 😔 😟 😕 🙁 ☹️ 😣 😖 😫 😩 🥺 😢 😭 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 😥 😓 🤗 🤔 🤭 🤫 🤥 😶 😐 😑 😬 🙄 😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 🤐 🥴 🤢 🤮 🤧 😷 🤒 🤕 🤑 🤠 😈 👿 👹 👺 🤡 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 😺 😸 😹 😻 😼 😽 🙀 😿 😾
+                        </div>
+                    </div>
+                </div>
+                <button id="send-btn" class="send-btn">发送</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 传递昵称到JavaScript
+        const USER_NICKNAME = '{{ nickname }}';
+    </script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

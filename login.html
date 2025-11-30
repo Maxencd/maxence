@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代派智能聊天室 - 登录</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>代派智能聊天室</h2>
+            <div class="form-group">
+                <label for="nickname">昵称</label>
+                <input type="text" id="nickname" placeholder="请输入您的昵称" required>
+                <div id="nickname-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="server">服务器地址</label>
+                <select id="server" required>
+                    <option value="">加载中...</option>
+                </select>
+            </div>
+            <button id="login-btn" class="login-btn">登录</button>
+            <div id="login-status" class="status-message"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>
